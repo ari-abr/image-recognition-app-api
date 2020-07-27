@@ -9,11 +9,11 @@ app.use(cors());
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
-const db = require('knex')({
+const db = knex({
   client: 'pg',
   connection: {
     connectionString: process.env.DATABASE_URL,
-    ssl: true
+    ssl: true,
   },
 });
 app.get('/', (req, res) => {
@@ -112,7 +112,7 @@ app.post('/register', (req, res) => {
       })
       .then(trx.commit)
       .catch(trx.rollback);
-  }).catch((err) => res.status(400).json('unable to register'));
+  }).catch((err) => res.status(400).json(err));
 });
 
 app.get('/profile/:id', (req, res) => {
@@ -143,5 +143,5 @@ app.put('/image', (req, res) => {
 });
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log('running on port ${process.env.PORT}');
+  console.log('running on port');
 });
