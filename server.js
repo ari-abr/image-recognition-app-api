@@ -110,7 +110,7 @@ app.put('/image', (req, res) => {
     .then((entries) => {
       res.json(entries[0]);
     })
-    .catch((err) => res.status(400).json('no entry count'));
+    .catch((err) => res.status(400).json('0'));
 });
 
 app.listen(process.env.PORT || 3000, () => {
